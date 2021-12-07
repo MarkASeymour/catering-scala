@@ -1,6 +1,6 @@
-package com.markseymour
+package catering
 
-class CateringItem (name: String, price: Double, itemId: String, foodCat: String,var quantity: Int = 50){
+class CateringItem (var name: String, var price: Double, var itemId: String, var foodCat: String,var quantity: Int = 50){
 
   def decreaseQuant(amountToDecrease: Int): Int = {
     quantity = quantity - amountToDecrease

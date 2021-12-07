@@ -1,4 +1,4 @@
-package com.markseymour
+package catering
 
 class FileReader {
 
