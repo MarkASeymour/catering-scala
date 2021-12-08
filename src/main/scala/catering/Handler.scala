@@ -90,6 +90,7 @@ class Handler (var inventory: Inventory,var shoppingCart: ShoppingCart, var menu
     }
     else if (response == "3") {
       //todo: print final bill method
+      printFinalBill()
 
       returnToMenu = true
     }

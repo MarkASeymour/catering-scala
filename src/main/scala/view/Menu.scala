@@ -27,7 +27,7 @@ class Menu (var inventory: Inventory, var cart: ShoppingCart, var handler: Handl
       println("(2) Select Products")
       println("(3) Complete Transaction")
       val response = readLine()
-      // todo: handler order menu choices
+      handler.orderMenuChoices(response)
     }
   }
 
