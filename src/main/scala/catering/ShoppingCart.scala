@@ -3,13 +3,13 @@ package catering
 import java.text.DecimalFormat
 import scala.math._
 
-class ShoppingCart (var cart: Map[String, Integer] = Map.empty, var balance: Double){
+class ShoppingCart (var cart: Map[String, Integer] = Map.empty, var balance: Double = 0){
 
   def addToCart(itemId: String, quantity: Int): Unit = {
     if(cart(itemId) == null) {
-      cart = cart + (itemId, quantity)
+      cart += itemId -> quantity
     } else {
-      cart = cart + (itemId, (cart(itemId) + quantity))
+      cart += (itemId -> (cart(itemId) + quantity))
     }
   }
 
@@ -50,7 +50,7 @@ class ShoppingCart (var cart: Map[String, Integer] = Map.empty, var balance: Dou
       billList :+ "%-3s  %-10s  %-20s  %-8s  %-8s".format(v, itemType, name, unitPrice, totalUnitPrice)
 
     }
-
+    billList
   }
 
   def giveChange(inventoryOne: Inventory): String = {
@@ -73,7 +73,7 @@ class ShoppingCart (var cart: Map[String, Integer] = Map.empty, var balance: Dou
     coins = coins % 5
     val pennies = (coins/1)
 
-    return s"$20's: $twenties | $10's: $tens | $5's: $fives | $1's: $ones | Quarters: $quarters | Dimes: $dimes | Nickels: $nickels | Pennies: $pennies"
+    return s"20's: ${twenties} | 10's: ${tens} | 5's: ${fives} | 1's: ${ones} | Quarters: ${quarters} | Dimes: ${dimes} | Nickels: ${nickels} | Pennies: ${pennies}"
   }
 
 }
