@@ -56,7 +56,7 @@ class Handler (var inventory: Inventory,var shoppingCart: ShoppingCart, var menu
       var currentStock = 0
       println("Enter product ID: ")
       val idResponse = readLine()
-      val exists = inventory.itemExists(response)
+      val exists = inventory.itemExists(idResponse)
       if(!exists) {
         println("Please enter a valid ID")
         println("------------------------------------------")
@@ -66,7 +66,7 @@ class Handler (var inventory: Inventory,var shoppingCart: ShoppingCart, var menu
         val quantityResponse: Int = readLine().toInt
         currentStock = inventory.inventoryMap(idResponse).quantity
         var totalPrice = shoppingCart.getTotalPrice(inventory, idResponse, quantityResponse)
-        if((shoppingCart.balance - totalPrice) > 0) {
+        if((shoppingCart.balance - totalPrice) < 0) {
           println("Insufficient Funds. Add more to your balance to continue.")
           println("----------------------------------------------------------")
         } else {
@@ -104,7 +104,8 @@ class Handler (var inventory: Inventory,var shoppingCart: ShoppingCart, var menu
       println(billItem)
     }
     println("Total: $" + format.format(shoppingCart.getAmountOwed(inventory)))
-    println(shoppingCart.giveChange(inventory))
+    val owed = (shoppingCart.getAmountOwed(inventory)) - (shoppingCart.balance)
+    println("Changed Owed: $" + format.format(shoppingCart.balance))
     println("----------------------------------------------------------")
     shoppingCart.subtractFromBalance(shoppingCart.balance)
 

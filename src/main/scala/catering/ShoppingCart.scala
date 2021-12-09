@@ -3,11 +3,11 @@ package catering
 import java.text.DecimalFormat
 import scala.math._
 
-class ShoppingCart (var cart: Map[String, Integer] = Map.empty, var balance: Double = 0){
+class ShoppingCart (var cart: Map[String, Int] = Map.empty, var balance: Double = 0){
 
   def addToCart(itemId: String, quantity: Int): Unit = {
-    if(cart(itemId) == null) {
-      cart += itemId -> quantity
+    if(!cart.contains(itemId)) {
+      cart += (itemId -> quantity)
     } else {
       cart += (itemId -> (cart(itemId) + quantity))
     }
@@ -51,29 +51,6 @@ class ShoppingCart (var cart: Map[String, Integer] = Map.empty, var balance: Dou
 
     }
     billList
-  }
-
-  def giveChange(inventoryOne: Inventory): String = {
-    var change: Double = balance
-    var coins: Double = ceil((change - floor(change)) * 100)
-    var bankNotes: Int = (change - (change - floor(change))).toInt
-    val twenties: Int = (bankNotes/20)
-    bankNotes = bankNotes % 20
-    val tens = (bankNotes/10)
-    bankNotes = bankNotes % 10
-    val fives = (bankNotes/5)
-    bankNotes = bankNotes % 5
-    val ones = (bankNotes/1)
-
-    val quarters = (coins/25)
-    coins = coins % 25
-    val dimes = (coins/10)
-    coins = coins % 10
-    val nickels = (coins/5)
-    coins = coins % 5
-    val pennies = (coins/1)
-
-    return s"20's: ${twenties} | 10's: ${tens} | 5's: ${fives} | 1's: ${ones} | Quarters: ${quarters} | Dimes: ${dimes} | Nickels: ${nickels} | Pennies: ${pennies}"
   }
 
 }
